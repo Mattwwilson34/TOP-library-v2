@@ -1,0 +1,16 @@
+{
+  "name": "TOP-library-v2",
+  "version": "1.0.0",
+  "description": "Application created as part of The Odin Project curriculum. The application allows users to view books within their library, mark them as read/unread, as well as add additional books.",
+  "main": "index.js",
+  "repository": "https://github.com/Mattwwilson34/TOP-library-v2.git",
+  "author": "Matt Wilson <mattwwilson34@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "test": "jest --watchAll"
+  },
+  "dependencies": {
+    "jest": "^28.1.3"
+  }
+}
