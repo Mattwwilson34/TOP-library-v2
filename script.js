@@ -1,14 +1,22 @@
 const libraryFactory = () => {
   //
   // Create empty library array
-  const lib = [];
+  let _lib = [];
 
   // Add book object to library array
   const addBook = (bookObject) => {
-    lib.push(bookObject);
+    _lib.push(bookObject);
   };
+
   //
-  return { lib, addBook };
+  return {
+    // Getters
+    getLib() {
+      return _lib;
+    },
+    // Methods
+    addBook,
+  };
 };
 
 module.exports = libraryFactory;

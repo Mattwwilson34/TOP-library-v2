@@ -9,7 +9,7 @@ describe('Library Factory Function', () => {
   // Check lib is instance of array
   it('lib is instance of array', () => {
     const library = libraryFactory();
-    expect(library.lib).toBeInstanceOf(Array);
+    expect(library.getLib()).toBeInstanceOf(Array);
   });
 
   // Check book is added to array
@@ -19,7 +19,7 @@ describe('Library Factory Function', () => {
     let bookInLibrary = false;
 
     // Check for book title in library
-    library.lib.forEach((book) => {
+    library.getLib().forEach((book) => {
       for (const key in book) {
         if (Object.hasOwn(book, key)) {
           const element = book[key];
@@ -30,7 +30,7 @@ describe('Library Factory Function', () => {
       }
     });
 
-    expect(library.lib.length).toBeGreaterThanOrEqual(1);
+    expect(library.getLib().length).toBeGreaterThanOrEqual(1);
     expect(bookInLibrary).toBeTruthy();
   });
 });
