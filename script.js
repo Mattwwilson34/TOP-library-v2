@@ -1,4 +1,4 @@
-const libraryFactory = () => {
+const createFactory = () => {
   //
   // Create empty library array
   let _lib = [];
@@ -19,4 +19,4 @@ const libraryFactory = () => {
   };
 };
 
-module.exports = libraryFactory;
+module.exports = createFactory;

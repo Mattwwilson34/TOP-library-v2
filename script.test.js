@@ -1,4 +1,4 @@
-const libraryFactory = require('./script');
+const createFactory = require('./script');
 
 const MOCK_BOOK = {
   title: 'The Fellowship of the Ring',
@@ -8,13 +8,13 @@ describe('Library Factory Function', () => {
   //
   // Check lib is instance of array
   it('lib is instance of array', () => {
-    const library = libraryFactory();
+    const library = createFactory();
     expect(library.getLib()).toBeInstanceOf(Array);
   });
 
   // Check book is added to array
   it('book object is added to lib', () => {
-    const library = libraryFactory();
+    const library = createFactory();
     library.addBook(MOCK_BOOK);
     let bookInLibrary = false;
 
