@@ -33,4 +33,14 @@ describe('Library Factory Function', () => {
     expect(library.getLib().length).toBeGreaterThanOrEqual(1);
     expect(bookInLibrary).toBeTruthy();
   });
+
+  // Check that lib is empty
+  it('empties lib array', () => {
+    const library = createFactory();
+    library.addBook(MOCK_BOOK);
+    library.emptyLib();
+
+    expect(library.getLib()).toBeInstanceOf(Array);
+    expect(library.getLib().length).toBe(0);
+  });
 });

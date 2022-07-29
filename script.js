@@ -8,6 +8,11 @@ const createFactory = () => {
     _lib.push(bookObject);
   };
 
+  // Empty lib
+  const emptyLib = () => {
+    _lib.length = 0;
+  };
+
   //
   return {
     // Getters
@@ -16,6 +21,7 @@ const createFactory = () => {
     },
     // Methods
     addBook,
+    emptyLib,
   };
 };
 
