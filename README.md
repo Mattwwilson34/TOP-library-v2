@@ -35,12 +35,42 @@ To Run Application:
 
 `open index.html in browser`
 
+## Reflection
+
+- What were some unexpected obstacles?
+
+### webpack:
+
+In order to utilize JS modules with this project I decided to use webpack. In order to generate uuid's my app uses the built in node crypto module, but as of webpack V5 it no longer
+supports built in node modules.
+
+In order to solve this issue I added the following code to my webpack config:
+
+```javascript
+module.exports = {
+  externals: {
+    crypto: 'crypto',
+  },
+};
+```
+
+This will make Webpack attempt to import crypto from the environment at runtime, rather than bundling its definition: `require('crypto')` will end up executing code that looks like this:
+
+```javascript
+function(module, exports) {
+  module.exports = crypto;  // i.e. `window.crypto`
+}
+```
+
+This solution was found via the following blog [Requiring Node Built-ins with Webpack written by
+Jeff Wear](https://www.mixmax.com/engineering/requiring-node-builtins-with-webpack)
+
 <!-- ## Reflection
 
 - What was the context for this project? (ie: was this a side project? was this for Turing? was this for an experiment?)
 - What did you set out to build?
 - Why was this project challenging and therefore a really good learning experience?
-- What were some unexpected obstacles?
+
 - What tools did you use to implement this project?
   - This might seem obvious because you are IN this codebase, but to all other humans now is the time to talk about why you chose webpack instead of create react app, or D3, or vanilla JS instead of a framework etc. Brag about your choices and justify them here.
 
