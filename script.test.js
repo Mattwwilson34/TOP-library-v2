@@ -1,6 +1,13 @@
 const createFactory = require('./script');
 
+let library;
+
+beforeEach(() => {
+  library = createFactory();
+});
+
 const MOCK_BOOK = {
+  id: 1,
   title: 'The Fellowship of the Ring',
 };
 
@@ -8,13 +15,11 @@ describe('Library Factory Function', () => {
   //
   // Check lib is instance of array
   it('lib is instance of array', () => {
-    const library = createFactory();
     expect(library.getLib()).toBeInstanceOf(Array);
   });
 
   // Check book is added to array
-  it('book object is added to lib', () => {
-    const library = createFactory();
+  it('adds book to lib', () => {
     library.addBook(MOCK_BOOK);
     let bookInLibrary = false;
 
@@ -32,6 +37,13 @@ describe('Library Factory Function', () => {
 
     expect(library.getLib().length).toBeGreaterThanOrEqual(1);
     expect(bookInLibrary).toBeTruthy();
+  });
+
+  it('deletes book from lib', () => {
+    library.addBook(MOCK_BOOK);
+    expect(library.getLib().length).toBe(1);
+    library.deleteBook(1);
+    expect(library.getLib().length).toBe(0);
   });
 
   // Check that lib is empty
