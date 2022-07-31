@@ -8,9 +8,10 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "jest --watchAll"
+    "test": "jest --verbose --watchAll"
   },
   "dependencies": {
+    "@types/jest": "^28.1.6",
     "jest": "^28.1.3"
   }
 }
