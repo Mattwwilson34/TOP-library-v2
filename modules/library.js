@@ -8,6 +8,7 @@ const createFactory = () => {
     _lib.push(bookObject);
   };
 
+  // Delete book
   const deleteBook = (bookId) => {
     //
     // Find book index
@@ -24,7 +25,6 @@ const createFactory = () => {
     _lib.length = 0;
   };
 
-  //
   return {
     // Getters
     getLib() {
