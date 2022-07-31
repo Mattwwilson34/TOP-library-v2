@@ -1,5 +1,16 @@
 const crypto = require('crypto');
 
+/**
+ * Represents a book
+ * @param {String} _title - The title of the book.
+ * @param {String} _author - The author of the book.
+ * @param {Number} _pages - The number of pages the book has.
+ * @param {String} _datePublished - The date that the book was published.
+ * @param {String} _summary - A brief summary of the book.
+ * @param {Boolean} _read - If the book was read.
+ * @returns a book object with the above value + _id + _isbn
+ */
+
 const createBook = (
   _title = 'no title provided at creation',
   _author = 'no author provided at creation',
