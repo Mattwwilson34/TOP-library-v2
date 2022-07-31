@@ -1,4 +1,4 @@
-const createFactory = require('./script');
+const createFactory = require('./library');
 
 let library;
 
