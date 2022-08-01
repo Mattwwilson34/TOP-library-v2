@@ -56,6 +56,8 @@ addBookBtn.addEventListener('click', () => {
   const inputs = document.querySelectorAll('input');
   const textArea = document.querySelector('textarea');
   const inputValues = [];
+
+  // Get radio button value
   inputs.forEach((input) => {
     if (input.type === 'radio' && !input.checked) {
       return;
