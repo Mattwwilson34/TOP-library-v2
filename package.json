@@ -7,7 +7,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "test": "jest --verbose --watchAll"
+    "test": "jest --verbose --watchAll",
+    "build": "webpack --watch"
   },
   "dependencies": {
     "@types/jest": "^28.1.6",
