@@ -24,7 +24,16 @@ const createBook = (
   return {
     // Getters
     getBook() {
-      return { _id, _title, _author, _pages, _datePublished, _summary, _isbn };
+      return {
+        _title,
+        _author,
+        _pages,
+        _datePublished,
+        _summary,
+        _read,
+        _isbn,
+        _id,
+      };
     },
     getId() {
       return _id;
