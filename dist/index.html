@@ -7,9 +7,11 @@
     <title>The Odin Library</title>
   </head>
   <body>
-    <h1>The Odin Library</h1>
     <article>
       <table>
+        <caption>
+          The Odin Library
+        </caption>
         <tr>
           <th>Title</th>
           <th>Author</th>
@@ -21,6 +23,42 @@
           <th>isbn</th>
         </tr>
       </table>
+      <button class="open-book-form-btn">Add Book</button>
+
+      <div id="book-form-container" class="book-form-container hidden">
+        <div class="new-book-form">
+          <label for="title">Title</label><input type="text" /><label
+            for="author"
+            >Author</label
+          ><input type="text" /><label for="pages">Pages</label
+          ><input type="number" /><label for="datePublished"
+            >Date Published</label
+          ><input type="text" />
+          <label for="summary">Summary</label>
+          <textarea id="summary" name="summary" rows="5" cols="33"> </textarea>
+          <fieldset>
+            <legend>Read</legend>
+            <div>
+              <input type="radio" id="true" name="drone" value="true" checked />
+              <label for="true">True</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="false"
+                name="drone"
+                value="false"
+                checked
+              />
+              <label for="false">False</label>
+            </div>
+          </fieldset>
+          <div class="button-contianer">
+            <button class="book-form-btn-add">Add Book</button>
+            <button class="book-form-btn-cancel">Cancel</button>
+          </div>
+        </div>
+      </div>
     </article>
     <script src="bundle.js"></script>
   </body>

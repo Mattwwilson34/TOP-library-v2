@@ -1,25 +1,103 @@
 import './style.css';
 
 const createLibrary = require('./modules/library');
+const createBook = require('./modules/book');
 const generateBooks = require('./modules/generate-books');
 
-// Initialize library
-const library = createLibrary();
+const NUM_OF_BOOKS_TO_SEED = 10;
 
-// Seed Library
-const booksArray = generateBooks(10);
-booksArray.forEach((book) => library.addBook(book.getBook()));
+const domHandler = {
+  init() {
+    this.library = createLibrary();
+    this.seedLibrary();
+    this.renderLibrary();
+    this.bindListeners();
+  },
 
-// Store DOM table element
-const table = document.querySelector('table');
+  // Render functions
+  // ==============
+  //
+  renderLibrary() {
+    this.library.getLib().forEach((book) => {
+      const row = document.createElement('tr');
+      for (const data in book) {
+        const tableCell = document.createElement('td');
+        tableCell.innerText = book[data];
+        row.append(tableCell);
+      }
+      this.table.append(row);
+    });
+  },
 
-// Add additional table elements + data to DOM
-library.getLib().forEach((book) => {
-  const row = document.createElement('tr');
-  for (const data in book) {
-    const tableCell = document.createElement('td');
-    tableCell.innerText = book[data];
-    row.append(tableCell);
-  }
-  table.append(row);
-});
+  refreshTableRows() {
+    this.deleteTableRows();
+    this.renderLibrary();
+  },
+
+  // Util functions
+  // ==============
+  //
+  seedLibrary() {
+    const booksArray = generateBooks(NUM_OF_BOOKS_TO_SEED);
+    booksArray.forEach((book) => this.library.addBook(book.getBook()));
+  },
+
+  deleteTableRows() {
+    const rows = document.querySelectorAll('table > tr');
+    rows.forEach((row) => row.remove());
+  },
+
+  // DOM element storage
+  // ==============
+  //
+  table: document.querySelector('table'),
+  bookFormContainer: document.getElementById('book-form-container'),
+  openBookFormBtn: document.querySelector('.open-book-form-btn'),
+  addBookBtn: document.querySelector('.book-form-btn-add'),
+  cancelBtn: document.querySelector('.book-form-btn-cancel'),
+  inputs: document.querySelectorAll('input'),
+  textArea: document.querySelector('textarea'),
+
+  // Listener functions
+  // ==============
+  //
+  toggleBookForm() {
+    this.bookFormContainer.classList.toggle('hidden');
+  },
+  addNewBook() {
+    const inputValues = [];
+    this.inputs.forEach((input) => {
+      //
+      // Only get checked radio button value
+      if (input.type === 'radio' && !input.checked) {
+        return;
+      }
+      inputValues.push(input.value);
+    });
+    //
+    // Add text area value to input values
+    inputValues.splice(4, 0, this.textArea.value);
+
+    // Create new book + add to library
+    const book = createBook(...inputValues);
+    this.library.addBook(book.getBook());
+
+    // Refresh table
+    this.refreshTableRows();
+    this.toggleBookForm();
+  },
+
+  // Bind listeners functions
+  // ==============
+  //
+  bindListeners() {
+    this.openBookFormBtn.addEventListener(
+      'click',
+      this.toggleBookForm.bind(this)
+    );
+    this.cancelBtn.addEventListener('click', this.toggleBookForm.bind(this));
+    this.addBookBtn.addEventListener('click', this.addNewBook.bind(this));
+  },
+};
+
+domHandler.init();
