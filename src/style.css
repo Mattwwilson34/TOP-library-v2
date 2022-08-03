@@ -2,6 +2,7 @@
 *:before,
 *:after {
   box-sizing: border-box;
+  font-family: 'Rubik', sans-serif;
 }
 
 html,
@@ -19,7 +20,6 @@ body {
 
 table {
   border-collapse: collapse;
-  text-align: center;
   overflow-x: auto;
 }
 
@@ -55,9 +55,14 @@ tr > th:last-child {
   border-top-right-radius: 5px;
 }
 
+tr > td:nth-child(n + 3):nth-child(-n + 4) {
+  text-align: center;
+}
+
 th {
   padding: 0.5rem;
   background-color: #60a5fa;
+  text-transform: uppercase;
 }
 
 td {
@@ -74,7 +79,7 @@ label {
 
 input,
 textarea {
-  padding: 0.3125rem;
+  padding: 0.5rem;
   font-size: 1.125rem;
   border-radius: 5px;
   outline: none;
