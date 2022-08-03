@@ -12,7 +12,7 @@ jobs:
         with:
           node-version: '18'
       - run: yarn install
-      - run: yarn test:ci
+      - run: yarn run test:ci
 
       - name: Tests ✅
         if: ${{ success() }}
