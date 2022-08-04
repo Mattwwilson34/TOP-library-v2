@@ -25,6 +25,10 @@ const domHandler = {
         tableCell.innerText = book[data];
         row.append(tableCell);
       }
+      // Add delete icon cell
+      const tableCell = document.createElement('td');
+      tableCell.append(this.createMaterialIconSpan('delete'));
+      row.append(tableCell);
       this.table.append(row);
     });
   },
@@ -32,6 +36,9 @@ const domHandler = {
   refreshTableRows() {
     this.deleteTableRows();
     this.renderLibrary();
+    document
+      .querySelectorAll('span')
+      .forEach((icon) => icon.addEventListener('click', this.deleteBook));
   },
 
   // Util functions
@@ -45,6 +52,13 @@ const domHandler = {
   deleteTableRows() {
     const rows = document.querySelectorAll('table > tr');
     rows.forEach((row) => row.remove());
+  },
+
+  createMaterialIconSpan(iconName) {
+    const spanIcon = document.createElement('span');
+    spanIcon.classList.add('material-symbols-outlined');
+    spanIcon.textContent = iconName;
+    return spanIcon;
   },
 
   // DOM element storage
@@ -64,6 +78,7 @@ const domHandler = {
   toggleBookForm() {
     this.bookFormContainer.classList.toggle('hidden');
   },
+
   addNewBook() {
     const inputValues = [];
     this.inputs.forEach((input) => {
@@ -87,6 +102,12 @@ const domHandler = {
     this.toggleBookForm();
   },
 
+  deleteBook(event) {
+    const bookId = event.target.parentNode.previousSibling.textContent;
+    domHandler.library.deleteBook(bookId);
+    domHandler.refreshTableRows();
+  },
+
   // Bind listeners functions
   // ==============
   //
@@ -97,6 +118,9 @@ const domHandler = {
     );
     this.cancelBtn.addEventListener('click', this.toggleBookForm.bind(this));
     this.addBookBtn.addEventListener('click', this.addNewBook.bind(this));
+    document
+      .querySelectorAll('span')
+      .forEach((icon) => icon.addEventListener('click', this.deleteBook));
   },
 };
 
