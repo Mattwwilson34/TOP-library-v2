@@ -13,9 +13,8 @@ const createFactory = () => {
     //
     // Find book index
     const bookIndex = _lib.findIndex((book) => {
-      return book.id === bookId;
+      return book._id === bookId;
     });
-
     // Remove book from library
     _lib.splice(bookIndex, 1);
   };
