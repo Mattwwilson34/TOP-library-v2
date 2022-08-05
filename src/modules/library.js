@@ -1,4 +1,4 @@
-const createFactory = () => {
+const createLibrary = () => {
   //
   // Create empty library array
   let _lib = [];
@@ -13,7 +13,7 @@ const createFactory = () => {
     //
     // Find book index
     const bookIndex = _lib.findIndex((book) => {
-      return book._id === bookId;
+      return book.getId() === bookId;
     });
     // Remove book from library
     _lib.splice(bookIndex, 1);
@@ -36,4 +36,4 @@ const createFactory = () => {
   };
 };
 
-module.exports = createFactory;
+module.exports = createLibrary;

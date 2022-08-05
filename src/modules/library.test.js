@@ -1,17 +1,22 @@
-const createFactory = require('./library');
+const createLibrary = require('./library');
+const createBook = require('./book');
 
 let library;
 
 beforeEach(() => {
-  library = createFactory();
+  library = createLibrary();
 });
 
-const MOCK_BOOK = {
-  id: 1,
-  title: 'The Fellowship of the Ring',
-};
+const MOCK_BOOK = createBook(
+  'The lord of the rings',
+  'J.R.R Tolkien',
+  2000,
+  '1930',
+  'Summary',
+  false
+);
 
-describe('Library Factory Function', () => {
+describe('Library Factory Functions', () => {
   //
   // Check lib is instance of array
   it('lib is instance of array', () => {
@@ -25,10 +30,11 @@ describe('Library Factory Function', () => {
 
     // Check for book title in library
     library.getLib().forEach((book) => {
-      for (const key in book) {
-        if (Object.hasOwn(book, key)) {
-          const element = book[key];
-          if (element === MOCK_BOOK.title) {
+      const bookData = book.getBook();
+      for (const key in bookData) {
+        if (Object.hasOwn(bookData, key)) {
+          const element = bookData[key];
+          if (element === MOCK_BOOK.getTitle()) {
             bookInLibrary = true;
           }
         }
@@ -41,14 +47,15 @@ describe('Library Factory Function', () => {
 
   it('deletes book from lib', () => {
     library.addBook(MOCK_BOOK);
+    const bookId = library.getLib()[0].getId();
     expect(library.getLib().length).toBe(1);
-    library.deleteBook(1);
+    library.deleteBook(bookId);
     expect(library.getLib().length).toBe(0);
   });
 
   // Check that lib is empty
   it('empties lib array', () => {
-    const library = createFactory();
+    const library = createLibrary();
     library.addBook(MOCK_BOOK);
     library.emptyLib();
 

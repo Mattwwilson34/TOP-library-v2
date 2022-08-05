@@ -1,21 +1,32 @@
 # TOP-library-v2
 
 Application created as part of The Odin Project curriculum. The application
-allows users to view books within their library, mark them as read/unread, as well as add additional books.
+allows users to view books within their library, mark them as read/unread, add additional books, and delete books.
 
 This is the second iteration of this project that I am using as a review after completing the odin project in order to review core javascript concepts as well
-improve the original projects code style anc architecture.
+improve the original projects code style and architecture.
+
+---
 
 ### Project Focus:
 
 - Follow TDD practices throughout development using Jest.
-- Use factory functions, modularity, and pure functions to maintain clean
-  testable code.
+- Use factory functions, modularity, and OOP principles to maintain clean
+  testable, and organized code.
 - Make UI/UX responsive and accessible with pure CSS.
 
 ## Project Status
 
-This project is currently in development.
+This project is complete.
+
+## Project Features:
+
+- Add new books to library
+- Toggle if books have been read or not
+- Delete books from library
+- Refresh page to remove all added books and re-seed library with fresh books
+
+---
 
 <!-- ## Project Screen Shot(s) -->
 
@@ -33,11 +44,28 @@ To Run Test Suite:
 
 To Run Application:
 
+`yarn run build`
+
 `open index.html in browser`
+
+---
 
 ## Reflection
 
-- What were some unexpected obstacles?
+This project was a one week from scratch rebuild of a library app that was
+originally part of The Odin Project curriculum. I chose to rebuild this project
+from scratch so that I could practice test driven development, OOP principles, and my git workflow.
+In respect to git I focused on working in branches as well as completing pull
+requests with attention documentation details.
+
+### Tech:
+
+I wanted to focus vanilla JS for this application so technologies I chose were VanillaJS, HTML5, CSS3. Additionally, I chose to use webpack so that I could get more experience with its setup/config as well as to allow me to
+bundle my JS code for modularity and adherence to OOP principles.
+
+---
+
+## Challenges:
 
 ### webpack:
 
