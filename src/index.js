@@ -4,7 +4,7 @@ const createLibrary = require('./modules/library');
 const createBook = require('./modules/book');
 const generateBooks = require('./modules/generate-books');
 
-const NUM_OF_BOOKS_TO_SEED = 10;
+const NUM_OF_BOOKS_TO_SEED = 5;
 
 const domHandler = {
   init() {
@@ -19,14 +19,15 @@ const domHandler = {
   //
   renderLibrary() {
     this.library.getLib().forEach((book) => {
+      const bookData = book.getBook();
       const row = document.createElement('tr');
-      for (const data in book) {
+      for (const data in bookData) {
         if (data === '_read') {
-          const readButton = this.checkIfBookRead(book, data);
+          const readButton = this.checkIfBookRead(bookData, data);
           row.append(readButton);
         } else {
           const tableCell = document.createElement('td');
-          tableCell.innerText = book[data];
+          tableCell.innerText = bookData[data];
           row.append(tableCell);
         }
       }
@@ -41,9 +42,17 @@ const domHandler = {
   refreshTableRows() {
     this.deleteTableRows();
     this.renderLibrary();
+
+    // re-bind event listeners
+    // Delete
     document
       .querySelectorAll('span')
       .forEach((icon) => icon.addEventListener('click', this.deleteBook));
+
+    // Toggle Read
+    document.querySelectorAll('.read-btn').forEach((btn) => {
+      btn.addEventListener('click', this.toggleRead);
+    });
   },
 
   // Util functions
@@ -51,7 +60,7 @@ const domHandler = {
   //
   seedLibrary() {
     const booksArray = generateBooks(NUM_OF_BOOKS_TO_SEED);
-    booksArray.forEach((book) => this.library.addBook(book.getBook()));
+    booksArray.forEach((book) => this.library.addBook(book));
   },
 
   deleteTableRows() {
@@ -69,9 +78,10 @@ const domHandler = {
   checkIfBookRead(bookObj, bookObjKeys) {
     const readButton = document.createElement('button');
     readButton.innerText = bookObj[bookObjKeys];
-    bookObj[bookObjKeys] === 'true'
-      ? readButton.classList.add('read-btn')
-      : readButton.classList.add('read-btn', 'not-read');
+    readButton.classList.add('read-btn');
+    bookObj[bookObjKeys] === true
+      ? readButton.classList.remove('not-read')
+      : readButton.classList.add('not-read');
     return readButton;
   },
 
@@ -103,13 +113,16 @@ const domHandler = {
       }
       inputValues.push(input.value);
     });
-    //
+
     // Add text area value to input values
     inputValues.splice(4, 0, this.textArea.value);
 
+    // Convert radio button input value from string to boolean
+    inputValues[5] = inputValues[5] === 'true';
+
     // Create new book + add to library
     const book = createBook(...inputValues);
-    this.library.addBook(book.getBook());
+    this.library.addBook(book);
 
     // Refresh table
     this.refreshTableRows();
@@ -123,11 +136,15 @@ const domHandler = {
   },
 
   toggleRead(event) {
+    const library = domHandler.library.getLib();
     const btn = event.target;
-    btn.classList.toggle('not-read');
-    btn.textContent === 'true'
-      ? (btn.textContent = 'false')
-      : (btn.textContent = 'true');
+    const bookId = btn.nextSibling.nextSibling.textContent;
+
+    const bookIndex = library.findIndex((book) => book.getId() === bookId);
+
+    domHandler.library.getLib()[bookIndex].setRead();
+
+    domHandler.refreshTableRows();
   },
 
   // Bind listeners functions
