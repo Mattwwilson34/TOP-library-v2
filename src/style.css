@@ -162,6 +162,14 @@ button:hover {
   display: none;
 }
 
+.read {
+  background-color: #4ade80;
+}
+
+.not-read {
+  background-color: #f87171;
+}
+
 .material-symbols-outlined {
   font-size: 30px;
   color: red;
