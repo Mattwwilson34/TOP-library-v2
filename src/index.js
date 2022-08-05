@@ -21,9 +21,14 @@ const domHandler = {
     this.library.getLib().forEach((book) => {
       const row = document.createElement('tr');
       for (const data in book) {
-        const tableCell = document.createElement('td');
-        tableCell.innerText = book[data];
-        row.append(tableCell);
+        if (data === '_read') {
+          const readButton = this.checkIfBookRead(book, data);
+          row.append(readButton);
+        } else {
+          const tableCell = document.createElement('td');
+          tableCell.innerText = book[data];
+          row.append(tableCell);
+        }
       }
       // Add delete icon cell
       const tableCell = document.createElement('td');
@@ -59,6 +64,15 @@ const domHandler = {
     spanIcon.classList.add('material-symbols-outlined');
     spanIcon.textContent = iconName;
     return spanIcon;
+  },
+
+  checkIfBookRead(bookObj, bookObjKeys) {
+    const readButton = document.createElement('button');
+    readButton.innerText = bookObj[bookObjKeys];
+    bookObj[bookObjKeys] === 'true'
+      ? readButton.classList.add('read-btn')
+      : readButton.classList.add('read-btn', 'not-read');
+    return readButton;
   },
 
   // DOM element storage
@@ -108,6 +122,14 @@ const domHandler = {
     domHandler.refreshTableRows();
   },
 
+  toggleRead(event) {
+    const btn = event.target;
+    btn.classList.toggle('not-read');
+    btn.textContent === 'true'
+      ? (btn.textContent = 'false')
+      : (btn.textContent = 'true');
+  },
+
   // Bind listeners functions
   // ==============
   //
@@ -118,9 +140,16 @@ const domHandler = {
     );
     this.cancelBtn.addEventListener('click', this.toggleBookForm.bind(this));
     this.addBookBtn.addEventListener('click', this.addNewBook.bind(this));
+
+    // Delete book click handler
     document
       .querySelectorAll('span')
       .forEach((icon) => icon.addEventListener('click', this.deleteBook));
+
+    // Toggle book read click handler
+    document.querySelectorAll('.read-btn').forEach((btn) => {
+      btn.addEventListener('click', this.toggleRead);
+    });
   },
 };
 
