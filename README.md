@@ -27,8 +27,9 @@ This project is complete.
 - Refresh page to remove all added books and re-seed library with fresh books
 
 ---
-
 <!-- ## Project Screen Shot(s) -->
+![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/49503056/183129211-666b3a01-b01b-4e2b-acbd-5461646b199a.gif)
+
 
 ## Installation and Setup Instructions
 
