@@ -11,7 +11,7 @@ const MOCK_BOOK = {
   title: 'The Fellowship of the Ring',
 };
 
-describe('Library Factory Function', () => {
+describe('Library Factory Functions', () => {
   //
   // Check lib is instance of array
   it('lib is instance of array', () => {
